@@ -133,16 +133,16 @@ defmodule Marshale.ModelMagic do
 
   def manipulate_line(
          {:=, [line: line_number],
-          [{variable, [line: _], nil}, {:__aliases__, [line: _], [type]}]}
-       ) do
-    {line_number, :set, variable, namespace_type(type)}
+          [{variable, [line: _], nil}, {:__aliases__, [line: _], types}]}
+       ) when is_list(types) do
+    {line_number, :set, variable, namespace_types(types)}
   end
 
   def manipulate_line(
          {:=, [line: line_number],
-          [{variable, [line: _], nil}, [{:__aliases__, [line: _], [type]}]]}
-       ) do
-    {line_number, :set, variable, [namespace_type(type)]}
+          [{variable, [line: _], nil}, [{:__aliases__, [line: _], types}]]}
+       ) when is_list(types) do
+    {line_number, :set, variable, [namespace_types(types)]}
   end
 
   def manipulate_line({:@, [line: line_number], [{:typedoc, [line: _], [documentation]}]}) do
@@ -152,39 +152,52 @@ defmodule Marshale.ModelMagic do
   # allow for `is` instead of `=`
 
   def manipulate_line(
-         {variable, [line: line_number], [{:is, [line: _], [{:__aliases__, [line: _], [type]}]}]}
+         {variable, [line: line_number], [{:is, [line: _], [{:__aliases__, [line: _], types}]}]}
        ) do
-    {line_number, :set, variable, namespace_type(type)}
+    {line_number, :set, variable, namespace_types(types)}
   end
 
   def manipulate_line(
          {variable, [line: line_number],
-          [{:is, [line: _], [[{:__aliases__, [line: _], [type]}]]}]}
+          [{:is, [line: _], [[{:__aliases__, [line: _], types}]]}]}
        ) do
-    {line_number, :set, variable, [namespace_type(type)]}
+    {line_number, :set, variable, [namespace_types(types)]}
   end
 
 
   @doc ~S"""
-  Namespaces an atom with `Elixir.`
+  Namespaces an atom.
 
-  This is needed because the AST contains atoms like: `:String`, but to access
-  a module, you need an atom like this `:"Elixir.String"`.
+  This both prepends `:Elixir.` to it, and also combines multiple names to
+  allow things such as `:"Marshale.ModelMagic"` instead of just `:ModelMagic` and
+  the like.
 
   ## Examples
 
       iex> function_exported?(:String, :downcase, 1)
       false
-      iex> function_exported?(Marshale.ModelMagic.namespace_type(:String), :downcase, 1)
+      iex> function_exported?(Marshale.ModelMagic.namespace_types(:String), :downcase, 1)
       true
+
+      iex> Marshale.ModelMagic.namespace_types([:Marshale, :ModelMagic])
+      Marshale.ModelMagic
 
   """
   @doc since: "0.1.0"
-  def namespace_type(type) when is_atom(type) do
+  def namespace_types(type) when is_atom(type) do
     type
     |> Atom.to_string()
     |> (fn string -> "Elixir." <> string end).()
     |> String.to_atom()
+  end
+
+  def namespace_types(types) when is_list(types) do
+    namespace_types(
+      types
+      |> Enum.map(&Atom.to_string(&1))
+      |> Enum.join(".")
+      |> String.to_atom()
+    )
   end
 
   @doc ~S"""
