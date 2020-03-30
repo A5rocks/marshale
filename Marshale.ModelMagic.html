@@ -8,7 +8,7 @@
     <meta name="project" content="marshale v0.1.0">
     <title>Marshale.ModelMagic — marshale v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-0ab8a6a80ebaaa287431.css" />
-    <script src="dist/sidebar_items-784dbcd6d0.js"></script>
+    <script src="dist/sidebar_items-6debc3fa1e.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-a225d03098e64fef431a.js"></script>
   </head>
@@ -71,6 +71,9 @@ Marshale.ModelMagic          <a href="https://github.com/A5rocks/marshale/blob/m
       </h1>
 
 
+        <section id="moduledoc">
+<p>A collection of helper functions for <a href="Marshale.ModelMagic.html#defmodel/1"><code class="inline">Marshale.ModelMagic.defmodel/1</code></a>.</p>
+        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -86,14 +89,81 @@ Marshale.ModelMagic          <a href="https://github.com/A5rocks/marshale/blob/m
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#defmodel/1">defmodel(list)</a>
+    <a href="#convert_function/1">convert_function(type)</a>
   </div>
+    <div class="summary-synopsis"><p>Returns AST for a <a href="Marshale.ModelUtil.html#convert/2"><code class="inline">Marshale.ModelUtil.convert/2</code></a> call based on a passed in type.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#defmodel/1">defmodel(do_block)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a model in the current module.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#document_line/2">document_line(line_number, simple_ast)</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns AST for a <code class="inline">@typedoc</code> statement from a line number, and the SimpleAST™️.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#document_type/2">document_type(simple_ast_variable, simple_ast)</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns a list which when <a href="https://hexdocs.pm/elixir/Enum.html#flat_map/2"><code class="inline">Enum.flat_map/2</code></a>-ed is the AST lines for documenting a variable.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_typedoc/2">get_typedoc(line_number, simple_ast)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets the typedoc for a variable (or <code class="inline">nil</code> is there is none).</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#handle_sigil_s/1">handle_sigil_s(content)</a>
+  </div>
+    <div class="summary-synopsis"><p>Takes in a <code class="inline">~s</code>&#39;s or <code class="inline">~S</code>&#39;s AST and returns the inner string.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#is_marshale_module?/1">is_marshale_module?(module)</a>
+  </div>
+    <div class="summary-synopsis"><p>Detects whether a passed in module has <code class="inline">__from_map__/1</code>.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#manipulate_line/1">manipulate_line(ast)</a>
+  </div>
+    <div class="summary-synopsis"><p>Turns AST to a SimpleAST™️ representation.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#map_update_function/1">map_update_function(field_and_function_tuple)</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns AST for a <a href="https://hexdocs.pm/elixir/Map.html#update/4"><code class="inline">Map.update/4</code></a> call based on field name and function.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#namespace_type/1">namespace_type(type)</a>
+  </div>
+    <div class="summary-synopsis"><p>Namespaces an atom with <code class="inline">Elixir.</code></p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#pipe/1">pipe(list)</a>
   </div>
-    <div class="summary-synopsis"><p>Construct a pipeline from a list.</p></div>
+    <div class="summary-synopsis"><p>Constructs a pipeline from a list.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#pop_tail/1">pop_tail(list)</a>
+  </div>
+    <div class="summary-synopsis"><p>Removes the last element from a list.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#tail/1">tail(list)</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns the last element of a list.</p></div>
 </div>
   </div>
         </section>
@@ -106,14 +176,41 @@ Marshale.ModelMagic          <a href="https://github.com/A5rocks/marshale/blob/m
             </a>
 Functions          </h1>
           <div class="functions-list">
+<section class="detail" id="convert_function/1">
+  <div class="detail-header">
+    <a href="#convert_function/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">convert_function(type)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L422" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Returns AST for a <a href="Marshale.ModelUtil.html#convert/2"><code class="inline">Marshale.ModelUtil.convert/2</code></a> call based on a passed in type.</p>
+<p>To be more specific, this returns the AST for the anonymous function call,
+which in non-AST terms would look like this:</p>
+<pre><code class="Elixir">&amp;Marshale.ModelUtil.convert(&amp;1, &lt;type&gt;)</code></pre>
+<h2 id="convert_function/1-examples" class="section-heading">
+  <a href="#convert_function/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="5713111642-1">(</span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">convert_function</span><span class="p" data-group-id="5713111642-2">(</span><span class="nc">String</span><span class="p" data-group-id="5713111642-2">)</span><span class="p" data-group-id="5713111642-1">)</span><span class="w">
+</span><span class="s">&quot;&amp;(Marshale.ModelUtil.convert(&amp;1, String))&quot;</span></code></pre>
+  </section>
+</section>
 <section class="detail" id="defmodel/1">
   <div class="detail-header">
     <a href="#defmodel/1" class="detail-link" title="Link to this macro">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature">defmodel(list)</h1>
-      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L10" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">defmodel(do_block)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L27" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -121,6 +218,287 @@ Functions          </h1>
       <span class="note">(since 0.1.0)</span>
   </div>
   <section class="docstring">
+<p>Creates a model in the current module.</p>
+<p>This does the following:</p>
+<ul>
+<li><code class="inline">typedoc</code>s accordingly
+</li>
+<li><code class="inline">type</code>s accordingly
+</li>
+<li><p>creates a <code class="inline">__from_map__/1</code> which converts to the types you specify</p>
+<ul>
+<li>this only <a href="Marshale.ModelUtil.html#convert/2"><code class="inline">Marshale.ModelUtil.convert/2</code></a>s to types where
+<a href="Marshale.ModelMagic.html#is_marshale_module?/1"><code class="inline">Marshale.ModelMagic.is_marshale_module?/1</code></a> returns <code class="inline">true</code>.
+</li>
+</ul>
+</li>
+<li>creates a struct in the current module with the given fields
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="document_line/2">
+  <div class="detail-header">
+    <a href="#document_line/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">document_line(line_number, simple_ast)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L248" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Returns AST for a <code class="inline">@typedoc</code> statement from a line number, and the SimpleAST™️.</p>
+<p>This function gets the documentation for a variable using
+<a href="Marshale.ModelMagic.html#get_typedoc/2"><code class="inline">Marshale.ModelMagic.get_typedoc/2</code></a>, then creates a <code class="inline">@typedoc [documentation]</code>,
+which it then returns the AST for (or <code class="inline">nil</code> if the variable has no
+documentation associated with it).</p>
+<h2 id="document_line/2-examples" class="section-heading">
+  <a href="#document_line/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4010975621-1">(</span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">document_line</span><span class="p" data-group-id="4010975621-2">(</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="mi">3</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="4010975621-3">[</span><span class="p" data-group-id="4010975621-4">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">:document</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Onwards and upwards&quot;</span><span class="p" data-group-id="4010975621-4">}</span><span class="p" data-group-id="4010975621-3">]</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="4010975621-2">)</span><span class="p" data-group-id="4010975621-1">)</span><span class="w">
+</span><span class="s">&quot;@typedoc(</span><span class="se">\&quot;</span><span class="s">Onwards and upwards</span><span class="se">\&quot;</span><span class="s">)&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="document_type/2">
+  <div class="detail-header">
+    <a href="#document_type/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">document_type(simple_ast_variable, simple_ast)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L207" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Returns a list which when <a href="https://hexdocs.pm/elixir/Enum.html#flat_map/2"><code class="inline">Enum.flat_map/2</code></a>-ed is the AST lines for documenting a variable.</p>
+<p>Takes in the SimpleAST™️ form of a variable and the whole SimpleAST™️ region,
+and outputs said AST lines for documenting the variable.</p>
+<h2 id="document_type/2-examples" class="section-heading">
+  <a href="#document_type/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="1590333169-1">(</span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">document_type</span><span class="p" data-group-id="1590333169-2">(</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1590333169-3">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="ss">:set</span><span class="p">,</span><span class="w"> </span><span class="ss">:foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p" data-group-id="1590333169-3">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1590333169-4">[</span><span class="p" data-group-id="1590333169-5">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">:document</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;baz&quot;</span><span class="p" data-group-id="1590333169-5">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">   </span><span class="p" data-group-id="1590333169-6">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="ss">:set</span><span class="p">,</span><span class="w"> </span><span class="ss">:foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p" data-group-id="1590333169-6">}</span><span class="p" data-group-id="1590333169-4">]</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="1590333169-2">)</span><span class="p" data-group-id="1590333169-1">)</span><span class="w">
+</span><span class="s">&quot;[@typedoc(</span><span class="se">\&quot;</span><span class="s">baz</span><span class="se">\&quot;</span><span class="s">), @type(foo :: bar)]&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="get_typedoc/2">
+  <div class="detail-header">
+    <a href="#get_typedoc/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_typedoc(line_number, simple_ast)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L311" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Gets the typedoc for a variable (or <code class="inline">nil</code> is there is none).</p>
+<p>Takes in the line number of the variable, and the SimpleAST™️ of the block.
+It returns a string which is what the variable is typedoc-ed as, or <code class="inline">nil</code>.</p>
+<h2 id="get_typedoc/2-examples" class="section-heading">
+  <a href="#get_typedoc/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">get_typedoc</span><span class="p" data-group-id="4707649386-1">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4707649386-2">[</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">   </span><span class="p" data-group-id="4707649386-3">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:document</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, world!&quot;</span><span class="p" data-group-id="4707649386-3">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">   </span><span class="p" data-group-id="4707649386-4">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="ss">:set</span><span class="p">,</span><span class="w"> </span><span class="ss">:foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:Bar</span><span class="p" data-group-id="4707649386-4">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="4707649386-2">]</span><span class="p" data-group-id="4707649386-1">)</span><span class="w">
+</span><span class="s">&quot;Hello, world!&quot;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">get_typedoc</span><span class="p" data-group-id="4707649386-5">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4707649386-6">[</span><span class="p" data-group-id="4707649386-7">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="ss">:set</span><span class="p">,</span><span class="w"> </span><span class="ss">:foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:Bar</span><span class="p" data-group-id="4707649386-7">}</span><span class="p" data-group-id="4707649386-6">]</span><span class="p" data-group-id="4707649386-5">)</span><span class="w">
+</span><span class="no">nil</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="handle_sigil_s/1">
+  <div class="detail-header">
+    <a href="#handle_sigil_s/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">handle_sigil_s(content)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L278" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Takes in a <code class="inline">~s</code>&#39;s or <code class="inline">~S</code>&#39;s AST and returns the inner string.</p>
+<p>This may prevent interpolation from <code class="inline">~s</code> (I have not checked), but is a good
+compromise between simplicity and feature-complete-ness. If the passed in
+argument is not <code class="inline">~s</code>&#39;s or <code class="inline">~S</code>&#39;s AST, then this function just returns said
+argument.</p>
+<h2 id="handle_sigil_s/1-examples" class="section-heading">
+  <a href="#handle_sigil_s/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">handle_sigil_s</span><span class="p" data-group-id="8506856503-1">(</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="8506856503-2">{</span><span class="ss">:sigil_S</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8506856503-3">[</span><span class="ss">line</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8506856503-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8506856503-4">[</span><span class="p" data-group-id="8506856503-5">{</span><span class="ss">:&lt;&lt;&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8506856503-6">[</span><span class="ss">line</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8506856503-6">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8506856503-7">[</span><span class="s">&quot;Aloha!&quot;</span><span class="p" data-group-id="8506856503-7">]</span><span class="p" data-group-id="8506856503-5">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8506856503-8">[</span><span class="p" data-group-id="8506856503-8">]</span><span class="p" data-group-id="8506856503-4">]</span><span class="p" data-group-id="8506856503-2">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="8506856503-1">)</span><span class="w">
+</span><span class="s">&quot;Aloha!&quot;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">handle_sigil_s</span><span class="p" data-group-id="8506856503-9">(</span><span class="s">&quot;Aloha!&quot;</span><span class="p" data-group-id="8506856503-9">)</span><span class="w">
+</span><span class="s">&quot;Aloha!&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="is_marshale_module?/1">
+  <div class="detail-header">
+    <a href="#is_marshale_module?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">is_marshale_module?(module)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L476" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Detects whether a passed in module has <code class="inline">__from_map__/1</code>.</p>
+<p>This is the only test of whether of something is a <code class="inline">Marshale</code> module,
+allowing for basic modules to be assembled by hand, allowing for type
+conversions not of the map to struct type.</p>
+<h2 id="is_marshale_module?/1-examples" class="section-heading">
+  <a href="#is_marshale_module?/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Snowflake</span><span class="w"> </span><span class="k" data-group-id="0519569792-1">do</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="0519569792-2">(</span><span class="n">string</span><span class="p" data-group-id="0519569792-2">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">is_binary</span><span class="p" data-group-id="0519569792-3">(</span><span class="n">string</span><span class="p" data-group-id="0519569792-3">)</span><span class="w"> </span><span class="k" data-group-id="0519569792-4">do</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">    </span><span class="nc">String</span><span class="o">.</span><span class="n">to_integer</span><span class="p" data-group-id="0519569792-5">(</span><span class="n">string</span><span class="p" data-group-id="0519569792-5">)</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="k" data-group-id="0519569792-4">end</span><span class="w">
+</span><span class="gp unselectable">...&gt;</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="0519569792-6">(</span><span class="n">default</span><span class="p" data-group-id="0519569792-6">)</span><span class="w"> </span><span class="k" data-group-id="0519569792-7">do</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="k" data-group-id="0519569792-7">end</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="k" data-group-id="0519569792-1">end</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">is_marshale_module?</span><span class="p" data-group-id="0519569792-8">(</span><span class="nc">Snowflake</span><span class="p" data-group-id="0519569792-8">)</span><span class="w">
+</span><span class="no">true</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="manipulate_line/1">
+  <div class="detail-header">
+    <a href="#manipulate_line/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">manipulate_line(ast)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L132" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Turns AST to a SimpleAST™️ representation.</p>
+<p>This helps out with processing it, as it turns the AST which has tons of
+encapsulation into 2 possible different flat lines. They are:</p>
+<ul>
+<li><code class="inline">{line_number, :set, variable_name, type}</code>
+</li>
+<li><code class="inline">{line_number, :document, documentation}</code>
+</li>
+</ul>
+<p>Just do <code class="inline">quote do: a = :b</code> and look at the mess that is for processing
+easily. That&#39;s exactly why this method exists.</p>
+<h2 id="manipulate_line/1-examples" class="section-heading">
+  <a href="#manipulate_line/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">manipulate_line</span><span class="p" data-group-id="5379807958-1">(</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="5379807958-2">{</span><span class="ss">:=</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-3">[</span><span class="ss">line</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5379807958-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-4">[</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">    </span><span class="p" data-group-id="5379807958-5">{</span><span class="ss">:foo</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-6">[</span><span class="ss">line</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5379807958-6">]</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="5379807958-5">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">    </span><span class="p" data-group-id="5379807958-7">{</span><span class="ss">:__aliases__</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-8">[</span><span class="ss">line</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5379807958-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-9">[</span><span class="ss">:bar</span><span class="p" data-group-id="5379807958-9">]</span><span class="p" data-group-id="5379807958-7">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="5379807958-4">]</span><span class="p" data-group-id="5379807958-2">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="5379807958-1">)</span><span class="w">
+</span><span class="p" data-group-id="5379807958-10">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:set</span><span class="p">,</span><span class="w"> </span><span class="ss">:foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:&quot;Elixir.bar&quot;</span><span class="p" data-group-id="5379807958-10">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">manipulate_line</span><span class="p" data-group-id="5379807958-11">(</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="5379807958-12">{</span><span class="p">:</span><span class="err">@</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-13">[</span><span class="ss">line</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5379807958-13">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-14">[</span><span class="p" data-group-id="5379807958-15">{</span><span class="ss">:typedoc</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-16">[</span><span class="ss">line</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5379807958-16">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5379807958-17">[</span><span class="s">&quot;Aloha!&quot;</span><span class="p" data-group-id="5379807958-17">]</span><span class="p" data-group-id="5379807958-15">}</span><span class="p" data-group-id="5379807958-14">]</span><span class="p" data-group-id="5379807958-12">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="5379807958-11">)</span><span class="w">
+</span><span class="p" data-group-id="5379807958-18">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:document</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Aloha!&quot;</span><span class="p" data-group-id="5379807958-18">}</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="map_update_function/1">
+  <div class="detail-header">
+    <a href="#map_update_function/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">map_update_function(field_and_function_tuple)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L447" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Returns AST for a <a href="https://hexdocs.pm/elixir/Map.html#update/4"><code class="inline">Map.update/4</code></a> call based on field name and function.</p>
+<p>The input should be a tuple of field name and function. To be specific, the
+output and the input function are both AST. I highly recommend using
+<a href="Marshale.ModelMagic.html#convert_function/1"><code class="inline">Marshale.ModelMagic.convert_function/1</code></a> to generate the input function AST.</p>
+<h2 id="map_update_function/1-examples" class="section-heading">
+  <a href="#map_update_function/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="8308364916-1">(</span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">map_update_function</span><span class="p" data-group-id="8308364916-2">(</span><span class="p" data-group-id="8308364916-3">{</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">:foo</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">convert_function</span><span class="p" data-group-id="8308364916-4">(</span><span class="nc">String</span><span class="p" data-group-id="8308364916-4">)</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="8308364916-3">}</span><span class="p" data-group-id="8308364916-2">)</span><span class="p" data-group-id="8308364916-1">)</span><span class="w">
+</span><span class="s">&quot;Map.update(:foo, nil, &amp;(Marshale.ModelUtil.convert(&amp;1, String)))&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="namespace_type/1">
+  <div class="detail-header">
+    <a href="#namespace_type/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">namespace_type(type)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L183" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Namespaces an atom with <code class="inline">Elixir.</code></p>
+<p>This is needed because the AST contains atoms like: <code class="inline">:String</code>, but to access
+a module, you need an atom like this <code class="inline">:&quot;Elixir.String&quot;</code>.</p>
+<h2 id="namespace_type/1-examples" class="section-heading">
+  <a href="#namespace_type/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">function_exported?</span><span class="p" data-group-id="8899754601-1">(</span><span class="ss">:String</span><span class="p">,</span><span class="w"> </span><span class="ss">:downcase</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="8899754601-1">)</span><span class="w">
+</span><span class="no">false</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">function_exported?</span><span class="p" data-group-id="8899754601-2">(</span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">namespace_type</span><span class="p" data-group-id="8899754601-3">(</span><span class="ss">:String</span><span class="p" data-group-id="8899754601-3">)</span><span class="p">,</span><span class="w"> </span><span class="ss">:downcase</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="8899754601-2">)</span><span class="w">
+</span><span class="no">true</span></code></pre>
   </section>
 </section>
 <section class="detail" id="pipe/1">
@@ -130,18 +508,88 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">pipe(list)</h1>
-      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L206" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L395" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
       <span class="note">(since 0.1.0)</span>
   </div>
   <section class="docstring">
-<p>Construct a pipeline from a list.</p>
-<p>For example, something like</p>
-<pre><code class="Elixir">pipe([100, div(2), div(5)])</code></pre>
-<p>will turn into this:</p>
-<pre><code class="Elixir">100 |&gt; div(2) |&gt; div(5)</code></pre>
+<p>Constructs a pipeline from a list.</p>
+<p>In more specific, it should be able to a list of anything, but in practice,
+that &quot;anything&quot; is normally atoms. It returns the AST for a pipeline, too.</p>
+<h2 id="pipe/1-examples" class="section-heading">
+  <a href="#pipe/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="5163476088-1">(</span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="5163476088-2">(</span><span class="p" data-group-id="5163476088-3">[</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="ss">:foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p" data-group-id="5163476088-3">]</span><span class="p" data-group-id="5163476088-2">)</span><span class="p" data-group-id="5163476088-1">)</span><span class="w">
+</span><span class="s">&quot;100 |&gt; :foo |&gt; :bar&quot;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">piped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">pipe</span><span class="p" data-group-id="5163476088-4">(</span><span class="p" data-group-id="5163476088-5">[</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-6">(</span><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">div</span><span class="p" data-group-id="5163476088-7">(</span><span class="mi">2</span><span class="p" data-group-id="5163476088-7">)</span><span class="p" data-group-id="5163476088-6">)</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-8">(</span><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">div</span><span class="p" data-group-id="5163476088-9">(</span><span class="mi">5</span><span class="p" data-group-id="5163476088-9">)</span><span class="p" data-group-id="5163476088-8">)</span><span class="p" data-group-id="5163476088-5">]</span><span class="p" data-group-id="5163476088-4">)</span><span class="w">
+</span><span class="p" data-group-id="5163476088-10">{</span><span class="ss">:|&gt;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-11">[</span><span class="p" data-group-id="5163476088-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-12">[</span><span class="p" data-group-id="5163476088-13">{</span><span class="ss">:|&gt;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-14">[</span><span class="p" data-group-id="5163476088-14">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-15">[</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-16">{</span><span class="ss">:div</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-17">[</span><span class="p" data-group-id="5163476088-17">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-18">[</span><span class="mi">2</span><span class="p" data-group-id="5163476088-18">]</span><span class="p" data-group-id="5163476088-16">}</span><span class="p" data-group-id="5163476088-15">]</span><span class="p" data-group-id="5163476088-13">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-19">{</span><span class="ss">:div</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-20">[</span><span class="p" data-group-id="5163476088-20">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5163476088-21">[</span><span class="mi">5</span><span class="p" data-group-id="5163476088-21">]</span><span class="p" data-group-id="5163476088-19">}</span><span class="p" data-group-id="5163476088-12">]</span><span class="p" data-group-id="5163476088-10">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Macro</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="5163476088-22">(</span><span class="nc">Macro</span><span class="o">.</span><span class="n">expand_once</span><span class="p" data-group-id="5163476088-23">(</span><span class="n">piped</span><span class="p">,</span><span class="w"> </span><span class="bp">__ENV__</span><span class="p" data-group-id="5163476088-23">)</span><span class="p" data-group-id="5163476088-22">)</span><span class="w">
+</span><span class="s">&quot;div(div(100, 2), 5)&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="pop_tail/1">
+  <div class="detail-header">
+    <a href="#pop_tail/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">pop_tail(list)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L366" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Removes the last element from a list.</p>
+<p>This function is basically taken from StackOverflow, but is here because
+<a href="Marshale.ModelMagic.html#pipe/1"><code class="inline">Marshale.ModelMagic.pipe/1</code></a> requires it as a helper function.</p>
+<h2 id="pop_tail/1-examples" class="section-heading">
+  <a href="#pop_tail/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">pop_tail</span><span class="p" data-group-id="4502044832-1">(</span><span class="p" data-group-id="4502044832-2">[</span><span class="p" data-group-id="4502044832-2">]</span><span class="p" data-group-id="4502044832-1">)</span><span class="w">
+</span><span class="p" data-group-id="4502044832-3">{</span><span class="ss">:err</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Can&#39;t pop the tail of an empty list&quot;</span><span class="p" data-group-id="4502044832-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">pop_tail</span><span class="p" data-group-id="4502044832-4">(</span><span class="p" data-group-id="4502044832-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="4502044832-5">]</span><span class="p" data-group-id="4502044832-4">)</span><span class="w">
+</span><span class="p" data-group-id="4502044832-6">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="4502044832-6">]</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="tail/1">
+  <div class="detail-header">
+    <a href="#tail/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">tail(list)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/magic.ex#L340" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.0)</span>
+  </div>
+  <section class="docstring">
+<p>Returns the last element of a list.</p>
+<p>The code is basically <a href="Marshale.ModelMagic.html#pop_tail/1"><code class="inline">Marshale.ModelMagic.pop_tail/1</code></a>, but slightly
+modified. It&#39;s only here due to the fact Elixir includes no such utility
+to do this, and because both <a href="Marshale.ModelMagic.html#get_typedoc/2"><code class="inline">Marshale.ModelMagic.get_typedoc/2</code></a> and
+<a href="Marshale.ModelMagic.html#pipe/1"><code class="inline">Marshale.ModelMagic.pipe/1</code></a> need it.</p>
+<h2 id="tail/1-examples" class="section-heading">
+  <a href="#tail/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">tail</span><span class="p" data-group-id="1654755380-1">(</span><span class="p" data-group-id="1654755380-2">[</span><span class="p" data-group-id="1654755380-2">]</span><span class="p" data-group-id="1654755380-1">)</span><span class="w">
+</span><span class="p" data-group-id="1654755380-3">{</span><span class="ss">:err</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Can&#39;t take the tail of an empty list&quot;</span><span class="p" data-group-id="1654755380-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelMagic</span><span class="o">.</span><span class="n">tail</span><span class="p" data-group-id="1654755380-4">(</span><span class="p" data-group-id="1654755380-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="1654755380-5">]</span><span class="p" data-group-id="1654755380-4">)</span><span class="w">
+</span><span class="mi">3</span></code></pre>
   </section>
 </section>
           </div>
