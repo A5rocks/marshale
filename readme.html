@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.21.3">
-    <meta name="project" content="marshale v0.1.0">
-    <title>Marshale — marshale v0.1.0</title>
+    <meta name="project" content="marshale v0.1.1">
+    <title>Marshale — marshale v0.1.1</title>
     <link rel="stylesheet" href="dist/elixir-0ab8a6a80ebaaa287431.css" />
-    <script src="dist/sidebar_items-6debc3fa1e.js"></script>
+    <script src="dist/sidebar_items-daa9202d1f.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-a225d03098e64fef431a.js"></script>
   </head>
@@ -43,7 +43,7 @@
       <a href="https://a5rocks.github.io/marshale" class="sidebar-projectName">
 marshale      </a>
       <h2 class="sidebar-projectVersion">
-        v0.1.0
+        v0.1.1
       </h2>
     </div>
   </div>
@@ -70,41 +70,41 @@ marshale      </a>
 </h2>
 
 <p>Just do this to your <code class="inline">mix.exs</code>:</p>
-<pre><code class="nohighlight makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="5210568234-1">do</span><span class="w">
-  </span><span class="p" data-group-id="5210568234-2">[</span><span class="w">
-    </span><span class="p" data-group-id="5210568234-3">{</span><span class="ss">:marshale</span><span class="p">,</span><span class="w"> </span><span class="ss">git</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;git://github.com/A5rocks/marshale.git&quot;</span><span class="p" data-group-id="5210568234-3">}</span><span class="p">,</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="3222454936-1">do</span><span class="w">
+  </span><span class="p" data-group-id="3222454936-2">[</span><span class="w">
+    </span><span class="p" data-group-id="3222454936-3">{</span><span class="ss">:marshale</span><span class="p">,</span><span class="w"> </span><span class="ss">git</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;git://github.com/A5rocks/marshale.git&quot;</span><span class="p" data-group-id="3222454936-3">}</span><span class="p">,</span><span class="w">
     </span><span class="n">...</span><span class="w">
-  </span><span class="p" data-group-id="5210568234-2">]</span><span class="w">
-</span><span class="k" data-group-id="5210568234-1">end</span></code></pre>
+  </span><span class="p" data-group-id="3222454936-2">]</span><span class="w">
+</span><span class="k" data-group-id="3222454936-1">end</span></code></pre>
 <p>And now, you can define models in a subset of Elixir, like so:</p>
-<pre><code class="nohighlight makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExampleInteger</span><span class="w"> </span><span class="k" data-group-id="3907892796-1">do</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExampleInteger</span><span class="w"> </span><span class="k" data-group-id="1764210244-1">do</span><span class="w">
   </span><span class="na">@doc</span><span class="w"> </span><span class="no">false</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="3907892796-2">(</span><span class="n">object</span><span class="p" data-group-id="3907892796-2">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="1764210244-2">(</span><span class="n">object</span><span class="p" data-group-id="1764210244-2">)</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="3907892796-3">(</span><span class="n">string</span><span class="p" data-group-id="3907892796-3">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">is_binary</span><span class="p" data-group-id="3907892796-4">(</span><span class="n">string</span><span class="p" data-group-id="3907892796-4">)</span><span class="w"> </span><span class="k" data-group-id="3907892796-5">do</span><span class="w">
-    </span><span class="nc">String</span><span class="o">.</span><span class="n">to_integer</span><span class="p" data-group-id="3907892796-6">(</span><span class="n">string</span><span class="p" data-group-id="3907892796-6">)</span><span class="w">
-  </span><span class="k" data-group-id="3907892796-5">end</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="1764210244-3">(</span><span class="n">string</span><span class="p" data-group-id="1764210244-3">)</span><span class="w"> </span><span class="ow">when</span><span class="w"> </span><span class="n">is_binary</span><span class="p" data-group-id="1764210244-4">(</span><span class="n">string</span><span class="p" data-group-id="1764210244-4">)</span><span class="w"> </span><span class="k" data-group-id="1764210244-5">do</span><span class="w">
+    </span><span class="nc">String</span><span class="o">.</span><span class="n">to_integer</span><span class="p" data-group-id="1764210244-6">(</span><span class="n">string</span><span class="p" data-group-id="1764210244-6">)</span><span class="w">
+  </span><span class="k" data-group-id="1764210244-5">end</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="3907892796-7">(</span><span class="n">item</span><span class="p" data-group-id="3907892796-7">)</span><span class="w"> </span><span class="k" data-group-id="3907892796-8">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">__from_map__</span><span class="p" data-group-id="1764210244-7">(</span><span class="n">item</span><span class="p" data-group-id="1764210244-7">)</span><span class="w"> </span><span class="k" data-group-id="1764210244-8">do</span><span class="w">
     </span><span class="n">item</span><span class="w">
-  </span><span class="k" data-group-id="3907892796-8">end</span><span class="w">
-</span><span class="k" data-group-id="3907892796-1">end</span><span class="w">
+  </span><span class="k" data-group-id="1764210244-8">end</span><span class="w">
+</span><span class="k" data-group-id="1764210244-1">end</span><span class="w">
 
-</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Foo</span><span class="w"> </span><span class="k" data-group-id="3907892796-9">do</span><span class="w">
+</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Foo</span><span class="w"> </span><span class="k" data-group-id="1764210244-9">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Marshale.ModelMagic</span><span class="w">
 
-  </span><span class="n">defmodel</span><span class="w"> </span><span class="k" data-group-id="3907892796-10">do</span><span class="w">
+  </span><span class="n">defmodel</span><span class="w"> </span><span class="k" data-group-id="1764210244-10">do</span><span class="w">
     </span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ExampleInteger</span><span class="w">
 
     </span><span class="na">@typedoc</span><span class="w"> </span><span class="s">~S&quot;`baz` is a list of `ExampleInteger`s&quot;</span><span class="w">
-    </span><span class="n">baz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="3907892796-11">[</span><span class="nc">ExampleInteger</span><span class="p" data-group-id="3907892796-11">]</span><span class="w">
+    </span><span class="n">baz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1764210244-11">[</span><span class="nc">ExampleInteger</span><span class="p" data-group-id="1764210244-11">]</span><span class="w">
 
     </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Integer</span><span class="w">
-  </span><span class="k" data-group-id="3907892796-10">end</span><span class="w">
-</span><span class="k" data-group-id="3907892796-9">end</span></code></pre>
+  </span><span class="k" data-group-id="1764210244-10">end</span><span class="w">
+</span><span class="k" data-group-id="1764210244-9">end</span></code></pre>
 <p>This allows <code class="inline">typedoc</code>s to propagate properly and allows for the following:</p>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Foo</span><span class="o">.</span><span class="c">__from_map__</span><span class="p" data-group-id="9592309295-1">(</span><span class="p" data-group-id="9592309295-2">%{</span><span class="ss">bar</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">baz</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9592309295-3">[</span><span class="s">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;3&quot;</span><span class="p" data-group-id="9592309295-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;42&quot;</span><span class="p" data-group-id="9592309295-2">}</span><span class="p" data-group-id="9592309295-1">)</span><span class="w">
-</span><span class="p" data-group-id="9592309295-4">%</span><span class="nc" data-group-id="9592309295-4">Foo</span><span class="p" data-group-id="9592309295-4">{</span><span class="ss">bar</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">baz</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9592309295-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="9592309295-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;42&quot;</span><span class="p" data-group-id="9592309295-4">}</span></code></pre>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Foo</span><span class="o">.</span><span class="c">__from_map__</span><span class="p" data-group-id="9424422574-1">(</span><span class="p" data-group-id="9424422574-2">%{</span><span class="ss">bar</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">baz</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9424422574-3">[</span><span class="s">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;3&quot;</span><span class="p" data-group-id="9424422574-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;42&quot;</span><span class="p" data-group-id="9424422574-2">}</span><span class="p" data-group-id="9424422574-1">)</span><span class="w">
+</span><span class="p" data-group-id="9424422574-4">%</span><span class="nc" data-group-id="9424422574-4">Foo</span><span class="p" data-group-id="9424422574-4">{</span><span class="ss">bar</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">baz</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9424422574-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="9424422574-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;42&quot;</span><span class="p" data-group-id="9424422574-4">}</span></code></pre>
       <footer class="footer">
         <p>
           <span class="line">
