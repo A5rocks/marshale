@@ -1,4 +1,22 @@
 defmodule Marshale.ModelUtil do
+  @doc ~S"""
+  Converts an item(s) to a type.
+
+  To be specific, this only converts if the type is a "marshale type". This is
+  determined by `Marshale.ModelMagic.is_marshale_module?/1`.
+
+  ## Examples
+
+      iex> Marshale.ModelUtil.convert(nil, Integer)
+      nil
+
+      iex> Marshale.ModelUtil.convert("7", [Integer])
+      "7"
+
+      iex> Marshale.ModelUtil.convert(["7"], [Integer])
+      ["7"]
+  """
+  @doc since: "0.1.0"
   def convert(item, type)
   def convert(nil, _), do: nil
 
@@ -8,7 +26,7 @@ defmodule Marshale.ModelUtil do
 
   # handle structs made by us / others / atoms
   def convert(items, type) when is_atom(type) do
-    if function_exported?(type, :__from_map__, 1) do
+    if Marshale.ModelMagic.is_marshale_module?(type) do
       # a bit of a misnomer as it could be a non-map
       type.__from_map__(items)
     else
