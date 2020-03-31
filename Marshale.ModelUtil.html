@@ -88,6 +88,7 @@ Marshale.ModelUtil          <a href="https://github.com/A5rocks/marshale/blob/ma
   <div class="summary-signature">
     <a href="#convert/2">convert(item, type)</a>
   </div>
+    <div class="summary-synopsis"><p>Converts an item(s) to a type.</p></div>
 </div>
   </div>
         </section>
@@ -107,12 +108,29 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">convert(item, type)</h1>
-      <a href="https://github.com/A5rocks/marshale/blob/master/lib/util.ex#L2" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/util.ex#L20" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+      <span class="note">(since 0.1.0)</span>
   </div>
   <section class="docstring">
+<p>Converts an item(s) to a type.</p>
+<p>To be specific, this only converts if the type is a &quot;marshale type&quot;. This is
+determined by <a href="Marshale.ModelMagic.html#is_marshale_module?/1"><code class="inline">Marshale.ModelMagic.is_marshale_module?/1</code></a>.</p>
+<h2 id="convert/2-examples" class="section-heading">
+  <a href="#convert/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="9436000015-1">(</span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="nc">Integer</span><span class="p" data-group-id="9436000015-1">)</span><span class="w">
+</span><span class="no">nil</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="9436000015-2">(</span><span class="s">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9436000015-3">[</span><span class="nc">Integer</span><span class="p" data-group-id="9436000015-3">]</span><span class="p" data-group-id="9436000015-2">)</span><span class="w">
+</span><span class="s">&quot;7&quot;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="9436000015-4">(</span><span class="p" data-group-id="9436000015-5">[</span><span class="s">&quot;7&quot;</span><span class="p" data-group-id="9436000015-5">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9436000015-6">[</span><span class="nc">Integer</span><span class="p" data-group-id="9436000015-6">]</span><span class="p" data-group-id="9436000015-4">)</span><span class="w">
+</span><span class="p" data-group-id="9436000015-7">[</span><span class="s">&quot;7&quot;</span><span class="p" data-group-id="9436000015-7">]</span></code></pre>
   </section>
 </section>
           </div>
