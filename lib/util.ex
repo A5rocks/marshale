@@ -35,7 +35,36 @@ defmodule Marshale.ModelUtil do
   end
 
   # a noop default!
-  def convert(item, _) do
-    item
+  def convert(item, _), do: item
+
+  @doc ~S"""
+  The reverse of `Marshale.ModelUtil.convert/2`.
+
+  Note that this is akin to serialization, while `Marshale` is mostly focused
+  on deserialization (external data with incorrect types -> internal data with
+  correct types). This means this is not very powerful, but it should serve
+  its purposes to anybody who wants a simple data marshalling library that
+  goes both ways.
+
+  Also, to aim for simplicity when writing custom `Marshale` modules, the
+  required function (`__to_map__/1`) is not checked as part of
+  `Marshale.ModelMagic.is_marshale_module?/1`.
+  """
+  @doc since: "0.1.2"
+  def deconvert(item, type)
+  def deconvert(nil, _), do: nil
+
+  def deconvert(items, [type]) when is_list(items) do
+    Enum.map(items, fn item -> deconvert(item, type) end)
   end
+
+  def deconvert(item, type) when is_atom(type) do
+    if Marshale.ModelMagic.is_to_mappable?(type) do
+      type.__to_map__(item)
+    else
+      item
+    end
+  end
+
+  def deconvert(item, _), do: item
 end

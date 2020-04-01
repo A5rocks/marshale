@@ -20,6 +20,8 @@ defmodule Marshale.ModelMagic do
     * creates a `__from_map__/1` which converts to the types you specify
       * this only `Marshale.ModelUtil.convert/2`s to types where
       `Marshale.ModelMagic.is_marshale_module?/1` returns `true`.
+    * creates a `__to_map__/1` which changes the data back to the external
+    form. This is mainly for things like a datetime type or the like.
     * creates a struct in the current module with the given fields
 
   """
@@ -56,7 +58,7 @@ defmodule Marshale.ModelMagic do
     #    def __from_map__(map) when is_map(map) do
     #      intermediate =
     #        map
-    #        |> Map.update!(:foo, &Foo.__from_map__(&1))
+    #        |> Map.update(:foo, nil, &Foo.__from_map__(&1))
     #        |> ...
     #
     #      struct(__MODULE__, intermediate)
@@ -69,14 +71,15 @@ defmodule Marshale.ModelMagic do
       simple_ast
       |> Enum.filter(&(elem(&1, 1) == :set))
       |> Enum.map(&{elem(&1, 2), elem(&1, 3)})
-      # keep only marshale-compatible modules (moderate optimization)
-      |> Enum.filter(&is_marshale_module?(elem(&1, 1)))
+      # keep only modules (moderate optimization)
+      |> Enum.filter(&is_possibly_module(elem(&1, 1)))
       |> Enum.map(&{elem(&1, 0), convert_function(elem(&1, 1))})
       # now we have {:field_to_update, function}
       |> Enum.map(&map_update_function(&1))
-      # now we finally have Map.update!(:field_to_update, function)
+      # now we finally have Map.update(:field_to_update, nil, function)
       |> (fn lines -> [{:map, [], nil} | lines] end).()
       |> pipe
+
 
     # now we need to place `with_pipes` with `intermediate`,
     # and also add `struct(__MODULE__, intermediate)`...
@@ -91,6 +94,31 @@ defmodule Marshale.ModelMagic do
          [do: function_internals]
        ]}
 
+    # do the same as the above, except slightly changed:
+    #
+    #   def __to_map__(this) do
+    #     Struct.to_map(this)
+    #     |> Map.update(:foo, nil, &Foo.__to_map__(&1))
+    #     |> ...
+    #   end
+    #
+    to_map_with_pipes =
+      simple_ast
+      |> Enum.filter(&(elem(&1, 1) == :set))
+      |> Enum.map(&{elem(&1, 2), elem(&1, 3)})
+      |> Enum.filter(&is_possibly_module(elem(&1, 1)))
+      |> Enum.map(&{elem(&1, 0), deconvert_function(elem(&1, 1))})
+      |> Enum.map(&map_update_function(&1))
+      |> (fn lines -> [struct_to_map() | lines] end).()
+      |> pipe
+
+    to_map_function =
+      {:def, [],
+       [
+         {:__to_map__, [], [{:this, [], nil}]},
+         [do: to_map_with_pipes]
+       ]}
+
     quote do
       defstruct unquote(variables)
 
@@ -98,6 +126,9 @@ defmodule Marshale.ModelMagic do
 
       @doc false
       unquote(function)
+
+      @doc false
+      unquote(to_map_function)
     end
   end
 
@@ -441,6 +472,19 @@ defmodule Marshale.ModelMagic do
   end
 
   @doc ~S"""
+  Returns AST for a `Marshale.ModelUtil.deconvert/2` call based on a passed in type.
+
+  See `Marshale.ModelMagic.convert_function/1` for what this is the reverse of.
+  """
+  @doc since: "0.1.2"
+  def deconvert_function(type) do
+    {:&, [],
+     [
+       {{:., [], [{:__aliases__, [alias: false], [:Marshale, :ModelUtil]}, :deconvert]}, [],
+        [{:&, [], [1]}, type]}
+     ]}  end
+
+  @doc ~S"""
   Returns AST for a `Map.update/4` call based on field name and function.
 
   The input should be a tuple of field name and function. To be specific, the
@@ -487,12 +531,53 @@ defmodule Marshale.ModelMagic do
   """
   @doc since: "0.1.0"
   def is_marshale_module?(module)
-
   def is_marshale_module?([module]), do: is_marshale_module?(module)
 
   def is_marshale_module?(module) when is_atom(module) do
     function_exported?(module, :__from_map__, 1)
   end
 
-  def is_marshale_module?(_default), do: false
+  def is_marshale_module?(_), do: false
+
+  @doc ~S"""
+  Detects whether a module has a `__to_map__/1` function.
+
+  This is for use in things that have an external representation, for example
+  a timestamp which has to be sent in ISO8601 format.
+  """
+  @doc since: "0.1.2"
+  def is_to_mappable?(module)
+  def is_to_mappable?([module]), do: is_to_mappable?(module)
+
+  def is_to_mappable?(module) when is_atom(module) do
+    function_exported?(module, :__to_map__, 1)
+  end
+
+  def is_to_mappable?(_), do: false
+
+  @doc ~S"""
+  Creates a `Struct.to_map/1` call.
+
+  ## Examples
+
+      iex> Macro.to_string(Marshale.ModelMagic.struct_to_map)
+      "Map.from_struct(this)"
+  """
+  @doc since: "0.1.2"
+  def struct_to_map() do
+    {{:., [], [{:__aliases__, [alias: false], [:Map]}, :from_struct]}, [], [{:this, [], nil}]}
+  end
+
+  @doc ~S"""
+  Returns whether something is possibly a module in `Marshale`'s eyes.
+
+  All this does is check `is_atom/1`, or if it's a list with one component,
+  `is_atom/1` of that component. This is a less aggressive optimization, but
+  is used here because we can't be sure that the types used are fully loaded.
+  """
+  @doc since: "0.1.2"
+  def is_possibly_module(module)
+  def is_possibly_module(module) when is_atom(module), do: true
+  def is_possibly_module([module]) when is_atom(module), do: true
+  def is_possibly_module(_), do: false
 end
