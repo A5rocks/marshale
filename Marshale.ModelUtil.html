@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.21.3">
-    <meta name="project" content="marshale v0.1.1">
-    <title>Marshale.ModelUtil — marshale v0.1.1</title>
+    <meta name="project" content="marshale v0.1.2">
+    <title>Marshale.ModelUtil — marshale v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-0ab8a6a80ebaaa287431.css" />
-    <script src="dist/sidebar_items-daa9202d1f.js"></script>
+    <script src="dist/sidebar_items-7700309f48.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-a225d03098e64fef431a.js"></script>
   </head>
@@ -43,7 +43,7 @@
       <a href="https://a5rocks.github.io/marshale" class="sidebar-projectName">
 marshale      </a>
       <h2 class="sidebar-projectVersion">
-        v0.1.1
+        v0.1.2
       </h2>
     </div>
   </div>
@@ -63,7 +63,7 @@ marshale      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        <small class="app-vsn">marshale v0.1.1</small>
+        <small class="app-vsn">marshale v0.1.2</small>
 Marshale.ModelUtil          <a href="https://github.com/A5rocks/marshale/blob/master/lib/util.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
@@ -89,6 +89,12 @@ Marshale.ModelUtil          <a href="https://github.com/A5rocks/marshale/blob/ma
     <a href="#convert/2">convert(item, type)</a>
   </div>
     <div class="summary-synopsis"><p>Converts an item(s) to a type.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#deconvert/2">deconvert(item, type)</a>
+  </div>
+    <div class="summary-synopsis"><p>The reverse of <a href="Marshale.ModelUtil.html#convert/2"><code class="inline">Marshale.ModelUtil.convert/2</code></a>.</p></div>
 </div>
   </div>
         </section>
@@ -123,14 +129,39 @@ determined by <a href="Marshale.ModelMagic.html#is_marshale_module?/1"><code cla
   Examples
 </h2>
 
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="9436000015-1">(</span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="nc">Integer</span><span class="p" data-group-id="9436000015-1">)</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="1097723445-1">(</span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="nc">Integer</span><span class="p" data-group-id="1097723445-1">)</span><span class="w">
 </span><span class="no">nil</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="9436000015-2">(</span><span class="s">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9436000015-3">[</span><span class="nc">Integer</span><span class="p" data-group-id="9436000015-3">]</span><span class="p" data-group-id="9436000015-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="1097723445-2">(</span><span class="s">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1097723445-3">[</span><span class="nc">Integer</span><span class="p" data-group-id="1097723445-3">]</span><span class="p" data-group-id="1097723445-2">)</span><span class="w">
 </span><span class="s">&quot;7&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="9436000015-4">(</span><span class="p" data-group-id="9436000015-5">[</span><span class="s">&quot;7&quot;</span><span class="p" data-group-id="9436000015-5">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9436000015-6">[</span><span class="nc">Integer</span><span class="p" data-group-id="9436000015-6">]</span><span class="p" data-group-id="9436000015-4">)</span><span class="w">
-</span><span class="p" data-group-id="9436000015-7">[</span><span class="s">&quot;7&quot;</span><span class="p" data-group-id="9436000015-7">]</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Marshale.ModelUtil</span><span class="o">.</span><span class="n">convert</span><span class="p" data-group-id="1097723445-4">(</span><span class="p" data-group-id="1097723445-5">[</span><span class="s">&quot;7&quot;</span><span class="p" data-group-id="1097723445-5">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1097723445-6">[</span><span class="nc">Integer</span><span class="p" data-group-id="1097723445-6">]</span><span class="p" data-group-id="1097723445-4">)</span><span class="w">
+</span><span class="p" data-group-id="1097723445-7">[</span><span class="s">&quot;7&quot;</span><span class="p" data-group-id="1097723445-7">]</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="deconvert/2">
+  <div class="detail-header">
+    <a href="#deconvert/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">deconvert(item, type)</h1>
+      <a href="https://github.com/A5rocks/marshale/blob/master/lib/util.ex#L54" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(since 0.1.2)</span>
+  </div>
+  <section class="docstring">
+<p>The reverse of <a href="Marshale.ModelUtil.html#convert/2"><code class="inline">Marshale.ModelUtil.convert/2</code></a>.</p>
+<p>Note that this is akin to serialization, while <code class="inline">Marshale</code> is mostly focused
+on deserialization (external data with incorrect types -&gt; internal data with
+correct types). This means this is not very powerful, but it should serve
+its purposes to anybody who wants a simple data marshalling library that
+goes both ways.</p>
+<p>Also, to aim for simplicity when writing custom <code class="inline">Marshale</code> modules, the
+required function (<code class="inline">__to_map__/1</code>) is not checked as part of
+<a href="Marshale.ModelMagic.html#is_marshale_module?/1"><code class="inline">Marshale.ModelMagic.is_marshale_module?/1</code></a>.</p>
   </section>
 </section>
           </div>
